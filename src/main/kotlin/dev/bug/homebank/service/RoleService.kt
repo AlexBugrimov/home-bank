@@ -11,5 +11,7 @@ interface RoleService {
 
     fun findById(id: Long): Optional<Role>
 
+    fun findByName(name: String): Optional<Role>
+
     fun findAll(): List<Role>
 }

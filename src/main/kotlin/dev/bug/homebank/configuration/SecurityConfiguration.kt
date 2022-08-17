@@ -39,7 +39,7 @@ class SecurityConfiguration(
             .and()
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
             .and()
-                .authorizeRequests().antMatchers("/api/auth/**").permitAll()
+                .authorizeRequests().antMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated()
             .and()
                 .addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter::class.java)

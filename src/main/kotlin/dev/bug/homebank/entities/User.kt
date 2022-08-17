@@ -9,11 +9,11 @@ data class User(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long?,
 
-    val firstName: String,
+    val firstName: String?,
 
-    val lastName: String,
+    val lastName: String?,
 
-    val email: String,
+    val email: String?,
 
     @Column(unique = true)
     val login: String,

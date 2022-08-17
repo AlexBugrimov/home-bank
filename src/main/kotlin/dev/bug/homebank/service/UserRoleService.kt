@@ -25,6 +25,7 @@ class UserRoleService(
     }
 
     override fun findById(id: Long): Optional<Role> = roleRepository.findById(id)
+    override fun findByName(name: String): Optional<Role> = roleRepository.findByName(name)
 
     override fun findAll(): List<Role> = copyOf(roleRepository.findAll())
 }

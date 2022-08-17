@@ -1,5 +1,7 @@
 server:
   port: 8082
+  servlet:
+    context-path: /api/V1.0
 
 spring:
   application:
@@ -24,4 +26,4 @@ jwt-security:
 
 logging:
   level:
-    root: debug
+    root: info
