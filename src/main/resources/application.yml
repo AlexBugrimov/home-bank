@@ -18,6 +18,10 @@ spring:
       ddl-auto: create-drop
     show-sql: true
 
+jwt-security:
+  secret: secret_word
+  expiration: 86400000ms
+
 logging:
   level:
     root: debug

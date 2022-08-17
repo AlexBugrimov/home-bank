@@ -7,13 +7,13 @@ import javax.persistence.*
 data class Role(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private val id: Long?,
+    val id: Long?,
 
     @Column(name = "code", unique = true, length = 32)
-    private val name: String,
+    val name: String,
 
     @Column(length = 128)
-    private val label: String
+    val label: String
 ) {
 
     constructor(name: String, label: String) : this(null, name, label)
