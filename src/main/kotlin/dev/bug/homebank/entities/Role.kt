@@ -3,7 +3,7 @@ package dev.bug.homebank.entities
 import javax.persistence.*
 
 @Entity
-@Table
+@Table(name = "roles")
 data class Role(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
