@@ -8,16 +8,18 @@ import org.springframework.http.ResponseEntity
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
+@RequestMapping("/api/V1.0/auth")
 class SignUpController(
     val passwordEncoder: PasswordEncoder,
     val userService: UserService,
     val roleService: RoleService
     ) {
 
-    @PostMapping("/auth/sign-up")
+    @PostMapping("/sign-up")
     fun singUp(@RequestBody request: SignUpRequest): ResponseEntity<SignUpResponse> {
         val userExists = userService.findByLogin(request.login).isPresent
         if (userExists) {

@@ -7,15 +7,17 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
+@RequestMapping("/api/V1.0/auth")
 class SignInController(
     val authenticationManager: AuthenticationManager,
     val jwtToken: JwtToken,
 ) {
 
-    @PostMapping("/auth/sign-in")
+    @PostMapping("/sign-in")
     fun singIn(@RequestBody request: SingInRequest): ResponseEntity<SingInResponse> {
         val authentication = authenticationManager.authenticate(
             UsernamePasswordAuthenticationToken(request.login, request.password)

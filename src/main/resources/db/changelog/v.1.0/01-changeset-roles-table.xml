@@ -28,7 +28,7 @@
     </changeSet>
     <changeSet id="4" author="Bugrimov">
         <sqlFile
-                path="01-add-roles.sql"
+                path="01-insert-into-roles.sql"
                 dbms="postgresql"
                 encoding="utf8"
                 endDelimiter="\nGO"

@@ -28,7 +28,7 @@
     </changeSet>
     <changeSet id="5" author="Bugrimov">
         <sqlFile
-                path="10-add-users.sql"
+                path="10-insert-into-users.sql"
                 dbms="postgresql"
                 encoding="utf8"
                 endDelimiter="\nGO"

@@ -1,8 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import com.github.gradle.node.yarn.task.YarnTask
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
-    id("org.springframework.boot") version "2.7.2"
-    id("io.spring.dependency-management") version "1.0.12.RELEASE"
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
+    id("com.github.node-gradle.node")
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
     kotlin("plugin.jpa") version "1.6.21"
@@ -45,6 +48,47 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
+tasks {
+
+    test {
+        useJUnitPlatform()
+        testLogging {
+            events = setOf(TestLogEvent.PASSED, TestLogEvent.FAILED, TestLogEvent.SKIPPED)
+        }
+    }
+
+    val install = create<YarnTask>("install-dependencies") {
+        workingDir.set(file("${project.projectDir}/src/main/webapp"))
+        args.set(listOf("install"))
+    }
+
+    val build = create<YarnTask>("build-frontend") {
+        dependsOn(install)
+        workingDir.set(file("${project.projectDir}/src/main/webapp"))
+        args.set(listOf("build"))
+    }
+
+    val cleanup = create<Delete>("cleanup-frontend") {
+        delete("${project.projectDir}/src/main/webapp/build")
+    }
+
+    val copy = create<Copy>("copy-frontend") {
+        dependsOn(build)
+        from("${project.projectDir}/src/main/webapp/build")
+        into("${rootDir}/build/resources/main/static/.")
+    }
+
+    compileJava {
+        dependsOn(copy)
+    }
+
+    clean {
+        dependsOn(cleanup)
+    }
+}
+
+node {
+    download.set(true)
+    version.set("18.7.0")
+    yarnVersion.set("1.22.17")
 }
